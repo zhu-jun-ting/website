@@ -8,12 +8,12 @@
 
 | 路径 | 内容 |
 | --- | --- |
-| `index.html` | 首页，精选作品与科研入口 |
+| `index.html` | 一个 Flicker Highlight，后接图片和项目名平铺 |
 | `projects/index.html` | 五个核心项目、筛选搜索、更多实践和 PDF 合集 |
-| `projects/*.html` | 每个项目的职责、过程、成果、原文与演示入口 |
+| `projects/*.html` | 有 PDF 的作品按完整页序展示；其他项目只保留简短介绍 |
 | `research/index.html` | 科研索引 |
 | `research/spin.html` | NCSA SPIN / Reading Time Machine 研究与海报 |
-| `about.html` | 基于历史材料的背景与技能；当前职位和联系信息待新简历补充 |
+| `about.html` | 当前游戏系统策划职位、工作经历、项目重点与教育技能 |
 | `archive/index.html` | 12 个早期作品入口和原始课程目录 |
 | `artd218/`、`arts222/`、`artd299/` | 保留的原始课程作品 |
 
@@ -43,4 +43,4 @@ GitHub Pages 使用 `main` 分支的根目录。将生成页面与资源提交�
 
 发布前运行 `npm run build` 与 `npm run check`，并在浏览器检查桌面和手机布局。发布后确认 GitHub Pages 构建完成，再访问线上页面检查。
 
-`.source/` 是本地材料处理目录，已忽略，不会提交。最新简历收到前，不发布旧简历中的联系方式或推测当前职位。
+`.source/` 是本地材料处理目录，已忽略，不会提交。About Me 根据用户最新提供的简历截图和当前工作补充更新；未提供公开邮箱，联系方式继续留空。

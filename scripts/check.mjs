@@ -20,5 +20,15 @@ for(const file of readdirSync('assets/documents')){
  assert(b.subarray(-1024).toString().includes('%%EOF'),file+': incomplete PDF');
  assert(statSync('assets/documents/'+file).size<100*1024*1024,file+': exceeds GitHub file limit');
 }
-assert(!readFileSync('about.html','utf8').includes('mailto:'),'Contact must remain empty until the updated resume arrives');
-console.log(`PASS: ${roots.length} pages, ${count} local references, PDF integrity, and profile placeholders.`);
+const galleries={'projects/flicker.html':{flicker:7},'projects/emotional-damage.html':{'emotional-damage':7},'projects/alibi.html':{alibi:4},'projects/dymo.html':{dymo:5},'projects/luna.html':{luna:4},'research/spin.html':{'spin-poster':1,'spin-report':6}};
+for(const [file,docs] of Object.entries(galleries)){
+ const html=readFileSync(file,'utf8');
+ const actual=[...html.matchAll(/<img src="\.\.\/assets\/images\/([^"]+)"/g)].map(m=>m[1]);
+ const expected=Object.entries(docs).flatMap(([slug,pages])=>Array.from({length:pages},(_,i)=>`${slug}-${i+1}.webp`));
+ assert.deepEqual(actual,expected,file+': PDF pages must be complete and ordered');
+ assert(!/class="case-lead"|MY CONTRIBUTION/.test(html),file+': duplicate narrative');
+}
+const about=readFileSync('about.html','utf8');
+assert(about.includes('北京优乐科技有限公司')&&about.includes('2025.09 — 至今'),'Current role missing');
+assert(!about.includes('mailto:'),'No public contact email has been supplied');
+console.log(`PASS: ${roots.length} pages, ${count} local references, complete PDF page order, and current role.`);
