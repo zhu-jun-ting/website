@@ -1,0 +1,11 @@
+{
+  "name": "junting-zhu-portfolio",
+  "private": true,
+  "version": "1.0.0",
+  "description": "A buildless static portfolio for GitHub Pages",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/check.mjs",
+    "dev": "node scripts/serve.mjs"
+  }
+}
