@@ -8,8 +8,8 @@
 
 | 路径 | 内容 |
 | --- | --- |
-| `index.html` | 一个 Flicker Highlight，后接图片和项目名平铺 |
-| `projects/index.html` | 五个核心项目、筛选搜索、更多实践和 PDF 合集 |
+| `index.html` | 一个 Pinball Rouge Highlight，后接图片和项目名平铺 |
+| `projects/index.html` | 六个核心项目、筛选搜索、更多实践和 PDF 合集 |
 | `projects/*.html` | 有 PDF 的作品按完整页序展示；其他项目只保留简短介绍 |
 | `research/index.html` | 科研索引 |
 | `research/spin.html` | NCSA SPIN / Reading Time Machine 研究与海报 |
@@ -35,8 +35,9 @@ npm run dev
 - `scripts/build.mjs`：页面模板、科研、关于与归档内容。修改后重新 build；生成的 HTML 也需提交。
 - `assets/site.css` / `assets/site.js`：样式、移动导航、搜索筛选和图片预览。
 - `assets/documents/`：公开作品集和科研 PDF 原件。
-- `assets/images/`：从原作品集提取的 WebP 图像。
+- `assets/images/`：从原作品集提取的 WebP 图像，以及 Pinball Rouge 官方 Steam 截图。
 - `scripts/prepare-assets.py`：用 PyMuPDF 与 Pillow 重建图片，仅更新原始 PDF 时需要运行。
+- `docs/pinball-rouge-file-guide.md`：Pinball Rouge 源码目录、关键入口与网站素材对应。
 - `docs/portfolio-inventory.md`：作品优先级、依据和资料范围。
 
 ## 发布

@@ -1,5 +1,13 @@
 // English is emitted into the HTML; Chinese remains available without a network request.
 const entries = {
+  'Steam 商店':'View on Steam', 'GitHub 源码':'Source on GitHub',
+  '2023 — 至今':'2023 — Present', '游戏策划 / 程序开发':'Game Design / Programming',
+  'Pinball Rouge 游戏截图':'Pinball Rouge screenshots',
+  '弹射战斗':'Ricochet combat', '卡牌构筑':'Card builds', '对局结算':'Run results',
+  '弹球射击与卡牌构筑，已在 Steam 发布。':'Pinball shooting and card builds, available on Steam.',
+  '一款结合弹球射击与卡牌构筑的俯视角肉鸽游戏。利用弹射子弹清理敌人，在房间探索与战斗中选择卡牌、组合能力，形成自己的战斗方式。':'A top-down roguelite combining pinball shooting with card builds. Clear enemies with ricocheting projectiles, explore rooms, and combine cards and abilities to shape your playstyle.',
+  '项目始于 2023 年的团队原型 Orange Dawn，之后由我持续独立开发，并于 2025 年以 Pinball Rouge 在 Steam 发布。我的工作涵盖玩法与系统设计、Unity 程序开发，以及原型迭代。':'The project began as Orange Dawn, a team prototype in 2023. I continued its development independently and released it on Steam as Pinball Rouge in 2025. My work spans gameplay and systems design, Unity programming, and prototype iteration.',
+  '从团队原型 Orange Dawn 延续为独立开发的弹球肉鸽游戏，负责玩法、系统与 Unity 开发，2025 年在 Steam 发布。':'Continued the Orange Dawn team prototype as an independently developed pinball roguelite, handling gameplay, systems, and Unity development. Released on Steam in 2025.',
   '作品集':'Portfolio', '作品':'Work', '科研':'Research', '关于':'About', '实验归档':'Archive',
   '跳至正文':'Skip to content', 'Junting Zhu 首页':'Junting Zhu home', '朱钧霆':'Junting Zhu',
   '主导航':'Main navigation', '菜单':'Menu', '查看全部作品':'View all work', '回到顶部':'Back to top',

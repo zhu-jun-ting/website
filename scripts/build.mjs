@@ -1,32 +1,33 @@
 import {writeFileSync, mkdirSync} from 'node:fs';
-import {projects, additional} from './content.mjs';
+import {projects, additional, featuredProject} from './content.mjs';
 import {localize, translationsScript} from './i18n.mjs';
 
 const esc = s => String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
+const selectedProjects=[featuredProject,...projects];
 const site='https://zhu-jun-ting.github.io/Personal-Website-Local-Files/';
 function layout(path,title,description,body,active='') {
   const base=path==='404.html'?site:(path.includes('/')?'../':'./');
   const nav=[['作品','projects/index.html','work'],['科研','research/index.html','research'],['关于','about.html','about'],['实验归档','archive/index.html','archive']];
-  return `<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"><title>${esc(title)} · Junting Zhu</title><meta name="description" content="${esc(description)}"><meta property="og:title" content="${esc(title)} · Junting Zhu"><meta property="og:description" content="${esc(description)}"><meta property="og:image" content="${site}assets/images/flicker-cover.webp"><meta property="og:type" content="website"><link rel="canonical" href="${site+path}"><link rel="icon" href="${base}assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="${base}assets/site.css"><script src="${base}assets/translations.js" defer></script><script src="${base}assets/site.js" defer></script></head><body><a class="skip" href="#main">跳至正文</a><header class="site-header wrap"><a class="brand" href="${base}index.html" aria-label="Junting Zhu 首页"><span class="brand-mark">JZ<span>✳</span></span><span>朱钧霆 <span class="brand-en">JUNTING ZHU</span></span></a><button class="language-toggle" type="button" aria-label="Switch to Chinese" lang="zh-CN">中文</button><button class="menu-toggle" aria-controls="navigation" aria-expanded="false">菜单 <span>＋</span></button><nav id="navigation" aria-label="主导航">${nav.map(([label,url,key])=>`<a href="${base+url}" ${key===active?'aria-current="page"':''}>${label}</a>`).join('')}<a class="nav-index" href="${base}projects/index.html" aria-label="查看全部作品">↗</a></nav></header><main id="main">${body}</main><footer class="wrap site-footer"><a class="brand footer-brand" href="${base}index.html">JZ<span>✳</span></a><p>Junting (David) Zhu</p><a href="#main">回到顶部 ↑</a></footer><dialog class="lightbox" aria-label="作品图片预览"><button class="lightbox-close" autofocus aria-label="关闭图片预览">关闭 ×</button><img alt=""><p></p></dialog></body></html>`;
+  return `<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"><title>${esc(title)} · Junting Zhu</title><meta name="description" content="${esc(description)}"><meta property="og:title" content="${esc(title)} · Junting Zhu"><meta property="og:description" content="${esc(description)}"><meta property="og:image" content="${site}assets/images/pinball-rouge-cover.jpg"><meta property="og:type" content="website"><link rel="canonical" href="${site+(path==='projects/orange-dawn.html'?'projects/pinball-rouge.html':path)}"><link rel="icon" href="${base}assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="${base}assets/site.css"><script src="${base}assets/translations.js" defer></script><script src="${base}assets/site.js" defer></script></head><body><a class="skip" href="#main">跳至正文</a><header class="site-header wrap"><a class="brand" href="${base}index.html" aria-label="Junting Zhu 首页"><span class="brand-mark">JZ<span>✳</span></span><span>朱钧霆 <span class="brand-en">JUNTING ZHU</span></span></a><button class="language-toggle" type="button" aria-label="Switch to Chinese" lang="zh-CN">中文</button><button class="menu-toggle" aria-controls="navigation" aria-expanded="false">菜单 <span>＋</span></button><nav id="navigation" aria-label="主导航">${nav.map(([label,url,key])=>`<a href="${base+url}" ${key===active?'aria-current="page"':''}>${label}</a>`).join('')}<a class="nav-index" href="${base}projects/index.html" aria-label="查看全部作品">↗</a></nav></header><main id="main">${body}</main><footer class="wrap site-footer"><a class="brand footer-brand" href="${base}index.html">JZ<span>✳</span></a><p>Junting (David) Zhu</p><a href="#main">回到顶部 ↑</a></footer><dialog class="lightbox" aria-label="作品图片预览"><button class="lightbox-close" autofocus aria-label="关闭图片预览">关闭 ×</button><img alt=""><p></p></dialog></body></html>`;
 }
 function save(path,title,description,body,active) {if(path.includes('/')) mkdirSync(path.split('/')[0],{recursive:true});writeFileSync(path,localize(layout(path,title,description,body,active)));}
 
 function links(items){return items.map(([text,url])=>`<a class="text-link" href="${url}" target="_blank" rel="noopener noreferrer">${text} ↗</a>`).join('');}
-function card(p,base=''){return `<article class="project-card" data-category="${p.category}" data-search="${esc(p.title+' '+p.categoryLabel+' '+p.role)}"><a href="${base}projects/${p.slug}.html" class="project-image ${p.slug}" aria-label="查看 ${p.title} 项目"><img src="${base}assets/images/${p.slug}-cover.webp" alt="${p.title}" loading="lazy" width="918" height="516"></a><h2><a href="${base}projects/${p.slug}.html">${p.title}<span aria-hidden="true">↗</span></a></h2></article>`;}
+function card(p,base=''){return `<article class="project-card" data-category="${p.category}" data-search="${esc(p.title+' '+p.categoryLabel+' '+p.role)}"><a href="${base}projects/${p.slug}.html" class="project-image ${p.slug}" aria-label="查看 ${p.title} 项目"><img src="${base}assets/images/${p.cover||p.slug+'-cover.webp'}" alt="${p.title}" loading="lazy" width="918" height="516"></a><h2><a href="${base}projects/${p.slug}.html">${p.title}<span aria-hidden="true">↗</span></a></h2></article>`;}
 function spinCard(base=''){return `<article class="project-card"><a class="project-image poster" href="${base}research/spin.html" aria-label="查看 Reading Time Machine 项目"><img src="${base}assets/images/spin-poster-1.webp" alt="SPIN 研究海报" loading="lazy"></a><h2><a href="${base}research/spin.html">Reading Time Machine<span aria-hidden="true">↗</span></a></h2></article>`;}
 const pageCounts={flicker:7,'emotional-damage':7,alibi:4,dymo:5,luna:4,'spin-poster':1,'spin-report':6};
 function pdfPages(slug,title){return `<div class="pdf-stack" data-document="${slug}">${Array.from({length:pageCounts[slug]},(_,i)=>`<figure class="pdf-page"><a class="zoom" href="../assets/images/${slug}-${i+1}.webp" aria-label="放大：${esc(title)} 第 ${i+1} 页" data-caption="${esc(title)} · ${i+1} / ${pageCounts[slug]}"><img src="../assets/images/${slug}-${i+1}.webp" alt="${esc(title)}，第 ${i+1} 页，共 ${pageCounts[slug]} 页" loading="${i===0?'eager':'lazy'}" decoding="async"></a><figcaption>${String(i+1).padStart(2,'0')} / ${String(pageCounts[slug]).padStart(2,'0')}</figcaption></figure>`).join('')}</div>`;}
 function titleList(items){return `<div class="title-list">${items.map(([title,url])=>`<a href="${url}">${title}<span aria-hidden="true">↗</span></a>`).join('')}</div>`;}
 
 save('index.html','作品集','朱钧霆的游戏、设计与科研作品。',`
-<section class="wrap home-highlight"><h1 class="sr-only">朱钧霆作品集</h1><a class="highlight-image" href="projects/flicker.html" aria-label="查看 Flicker 项目"><img src="assets/images/flicker-cover.webp" alt="Flicker" width="918" height="516" fetchpriority="high"></a><div class="highlight-title"><h2><a href="projects/flicker.html">Flicker <span aria-hidden="true">↗</span></a></h2><span class="eyebrow">HIGHLIGHT</span></div></section>
-<section class="wrap home-grid" aria-label="作品"><div class="project-grid">${projects.slice(1).map(p=>card(p)).join('')}${spinCard()}</div></section>
+<section class="wrap home-highlight"><h1 class="sr-only">朱钧霆作品集</h1><a class="highlight-image pinball-highlight" href="projects/pinball-rouge.html" aria-label="查看 Pinball Rouge 项目"><img src="assets/images/pinball-rouge-2.jpg" alt="Pinball Rouge" width="1920" height="1080" fetchpriority="high"></a><div class="highlight-title"><h2><a href="projects/pinball-rouge.html">Pinball Rouge <span aria-hidden="true">↗</span></a></h2><span class="eyebrow">HIGHLIGHT</span></div></section>
+<section class="wrap home-grid" aria-label="作品"><div class="project-grid">${projects.map(p=>card(p)).join('')}${spinCard()}</div></section>
 <section class="wrap compact-section"><h2>更多作品</h2>${titleList([['全部作品','projects/index.html'],['科研','research/index.html'],['实验归档','archive/index.html']])}</section>`, 'work');
 
 save('projects/index.html','作品','游戏与交互设计作品。',`
 <section class="wrap page-intro"><h1>作品</h1></section>
-<section class="wrap"><div class="filter-bar"><div class="filters" role="group" aria-label="筛选作品"><button class="active" data-filter="all" aria-pressed="true">全部 <span>05</span></button><button data-filter="game" aria-pressed="false">游戏</button><button data-filter="design" aria-pressed="false">设计</button></div><label class="search-box"><span class="sr-only">搜索作品</span><input type="search" placeholder="搜索作品" id="project-search"></label></div><p class="filter-status sr-only" role="status">显示 5 个精选项目</p><div class="project-grid filter-grid">${projects.map(p=>card(p,'../')).join('')}</div><p class="empty-state" hidden>没有匹配的项目。</p></section>
-<section class="wrap compact-section"><h2>更多作品</h2>${titleList([['Pinball Rouge','pinball-rouge.html'],...additional.map(p=>[p.title,p.url||'orange-dawn.html'])])}</section>
+<section class="wrap"><div class="filter-bar"><div class="filters" role="group" aria-label="筛选作品"><button class="active" data-filter="all" aria-pressed="true">全部 <span>${String(selectedProjects.length).padStart(2,'0')}</span></button><button data-filter="game" aria-pressed="false">游戏</button><button data-filter="design" aria-pressed="false">设计</button></div><label class="search-box"><span class="sr-only">搜索作品</span><input type="search" placeholder="搜索作品" id="project-search"></label></div><p class="filter-status sr-only" role="status">显示 ${selectedProjects.length} 个精选项目</p><div class="project-grid filter-grid">${selectedProjects.map(p=>card(p,'../')).join('')}</div><p class="empty-state" hidden>没有匹配的项目。</p></section>
+<section class="wrap compact-section"><h2>更多作品</h2>${titleList(additional.map(p=>[p.title,p.url]))}</section>
 <section class="wrap compact-section"><h2>作品集 PDF</h2>${titleList([['项目索引','../assets/documents/project-links.pdf'],['Breadth','../assets/documents/breadth.pdf'],['Portfolio','../assets/documents/portfolio-overview.pdf']])}</section>`, 'work');
 
 for(const [i,p] of projects.entries()){
@@ -37,12 +38,13 @@ for(const [i,p] of projects.entries()){
   <section class="wrap next-project"><a href="${next.slug}.html">${next.title} <span aria-hidden="true">↗</span></a></section>`, 'work');
 }
 
-save('projects/pinball-rouge.html','Pinball Rouge','弹球肉鸽独立游戏项目。',`
-<section class="wrap detail-heading"><a class="back" href="index.html">← 作品</a><h1>Pinball Rouge</h1></section>
-<section class="wrap short-detail"><p class="eyebrow">2025.06 — 至今 · 独立开发</p><p>将弹球机制与肉鸽成长结合，通过子弹在敌人之间的弹射，以及不同的能力构筑，为每一局带来变化。</p></section>`, 'work');
-save('projects/orange-dawn.html','Orange Dawn','团队 Unity 2D roguelike 游戏项目。',`
-<section class="wrap detail-heading"><a class="back" href="index.html">← 作品</a><h1>Orange Dawn</h1></section>
-<section class="wrap short-detail"><p class="eyebrow">2023 · 游戏技术策划 / 程序组长</p><p>参与五人团队的 Unity 2D roguelike 项目，负责玩法技术实现、数值策划与程序协作，搭建核心玩法框架，实现程序化敌人与地图，以及约 20 种角色升级与武器内容。</p></section>`, 'work');
+const pinballBody=`
+<section class="wrap detail-heading"><a class="back" href="index.html">← 作品</a><h1>Pinball Rouge</h1><div class="actions">${links([['Steam 商店','https://store.steampowered.com/app/3978300/'],['GitHub 源码','https://github.com/zhu-jun-ting/Orange-dawn']])}</div></section>
+<section class="wrap game-intro"><p class="eyebrow">Unity / C# · Steam · 2025.11.16</p><p>一款结合弹球射击与卡牌构筑的俯视角肉鸽游戏。利用弹射子弹清理敌人，在房间探索与战斗中选择卡牌、组合能力，形成自己的战斗方式。</p><p>项目始于 2023 年的团队原型 Orange Dawn，之后由我持续独立开发，并于 2025 年以 Pinball Rouge 在 Steam 发布。我的工作涵盖玩法与系统设计、Unity 程序开发，以及原型迭代。</p></section>
+<section class="wrap game-gallery" aria-label="Pinball Rouge 游戏截图">${[2,3,1].map((n,i)=>`<a class="zoom" href="../assets/images/pinball-rouge-${n}.jpg" aria-label="${['弹射战斗','卡牌构筑','对局结算'][i]}" data-caption="Pinball Rouge · ${i+1} / 3"><img src="../assets/images/pinball-rouge-${n}.jpg" alt="${['弹射战斗','卡牌构筑','对局结算'][i]}" width="1920" height="1080" loading="${i===0?'eager':'lazy'}"></a>`).join('')}</section>
+<section class="wrap next-project"><a href="flicker.html">Flicker <span aria-hidden="true">↗</span></a></section>`;
+// Preserve old inbound links and language parameters with the same content and canonical URL.
+for(const slug of ['pinball-rouge','orange-dawn'])save(`projects/${slug}.html`,'Pinball Rouge','弹球射击与卡牌构筑，已在 Steam 发布。',pinballBody,'work');
 
 save('research/index.html','科研','NCSA SPIN、Nova Study 与数据分析项目。',`
 <section class="wrap page-intro"><h1>科研</h1></section>
@@ -65,8 +67,7 @@ save('about.html','About Me','朱钧霆，游戏系统策划。游戏原型、�
 <section class="wrap page-intro about-intro"><h1>朱钧霆<span class="name-en">Junting (David) Zhu</span></h1><p>游戏系统策划 / Game Designer</p></section>
 <section class="wrap resume-section"><h2>工作经历</h2>${experience.map(resumeRow).join('')}</section>
 <section class="wrap resume-section"><h2>项目重点</h2>${[
-['2025.06 — 至今','Pinball Rouge','独立开发','弹球与肉鸽机制结合，探索弹射战斗与不同能力构筑。'],
-['2023','Orange Dawn','游戏技术策划 / 程序组长','参与五人团队的 Unity 项目，负责核心玩法实现、程序协调，以及程序化内容与升级系统。'],
+['2023 — 至今','Pinball Rouge','游戏策划 / 程序开发','从团队原型 Orange Dawn 延续为独立开发的弹球肉鸽游戏，负责玩法、系统与 Unity 开发，2025 年在 Steam 发布。'],
 ['2022 — 2023','Flicker','独立设计与开发','将汉字构字关系转化为游戏机制，根据玩家测试迭代设计并完成 Demo。'],
 ['2022','Emotional Damage','游戏策划 / 技术美术','参与 Game Off 团队项目，协调叙事与美术资源整合，完成 4 条任务线与 7 个场景。']
 ].map(resumeRow).join('')}</section>
@@ -92,8 +93,8 @@ save('archive/index.html','实验归档','早期交互实验与课程作品。',
 <section class="wrap">${titleList(experiments.map(([name,type,desc,url])=>[name,'../'+url]))}</section>
 <section class="wrap compact-section"><h2>课程目录</h2>${titleList([['ARTD 218','../artd218/index.html'],['ARTS 222','../arts222/index.html'],['ARTD 299','../artd299/index.html']])}</section>`, 'archive');
 save('404.html','页面未找到','返回作品集。',`<section class="wrap page-intro error-page"><h1>404</h1><a class="text-link" href="${site}projects/index.html">返回作品 ↗</a></section>`);
-const paths=['index.html','projects/index.html',...projects.map(p=>`projects/${p.slug}.html`),'projects/pinball-rouge.html','projects/orange-dawn.html','research/index.html','research/spin.html','research/nova-study.html','research/sentiment-analysis.html','about.html','archive/index.html'];
+const paths=['index.html','projects/index.html',...projects.map(p=>`projects/${p.slug}.html`),'projects/pinball-rouge.html','research/index.html','research/spin.html','research/nova-study.html','research/sentiment-analysis.html','about.html','archive/index.html'];
 writeFileSync('sitemap.xml',`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${paths.map(p=>`<url><loc>${site+p}</loc></url>`).join('')}</urlset>`);
-console.log(`Built ${paths.length+1} static pages + sitemap.`);
+console.log(`Built ${paths.length+2} static pages + sitemap.`);
 
 writeFileSync('assets/translations.js',translationsScript());

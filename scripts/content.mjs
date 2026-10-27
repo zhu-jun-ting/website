@@ -78,8 +78,13 @@ export const projects = [
   }
 ];
 
+// Orange Dawn is the earlier name of this continuing project, confirmed by its creator.
+export const featuredProject = {
+  slug:'pinball-rouge', title:'Pinball Rouge', category:'game',
+  categoryLabel:'弹球肉鸽 · Pinball roguelite', role:'游戏策划 / 程序开发 · Game design / Programming',
+  cover:'pinball-rouge-cover.jpg'
+};
 export const additional = [
-  {title:'Orange Dawn',type:'游戏开发',year:'2023',text:'团队 2D roguelike 项目。按 2023 年简历记录，担任主程序并协调开发与集成，参与程序化敌人、地图和升级系统。',source:'依据 2023 年游戏方向简历；尚无独立作品集附件。'},
   {title:'Project Gutenberg',type:'UI / UX',year:'2021',text:'围绕捐赠流程重设计，完成前期调研、用户访谈、线框图和 Figma 高保真原型。',url:'https://www.behance.net/gallery/132578569/Project-Gutenberg-Donation-Flow-Redesigned'},
   {title:'MUX AIR 1',type:'交互设计',year:'2020',text:'以手势控制音乐播放器的概念项目，包含产品手册、原型、用户测试和 Wizard of Oz 演示。',url:'https://www.behance.net/gallery/110849369/MUX-AIR-I'},
   {title:'Museum of the Grand Prairie',type:'实体体验',year:'2022',text:'面向儿童的班级密室逃脱项目，负责第三幕管理、叙事一致性和制作可行性评估。',url:'https://david-escape-room.blogspot.com/'},
