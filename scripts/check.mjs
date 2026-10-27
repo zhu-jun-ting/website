@@ -3,9 +3,18 @@ import path from 'node:path';
 import assert from 'node:assert/strict';
 const roots=['index.html','about.html','404.html',...['projects','research','archive'].flatMap(dir=>readdirSync(dir).filter(n=>n.endsWith('.html')).map(n=>`${dir}/${n}`))];
 let count=0;
+const translations=JSON.parse(readFileSync('assets/translations.js','utf8').replace(/^window\.PORTFOLIO_I18N=/,'').trim().replace(/;$/,''));
+const decode=s=>s.replaceAll('&quot;','"').replaceAll('&lt;','<').replaceAll('&gt;','>').replaceAll('&amp;','&');
 for(const filename of roots){
  const text=readFileSync(filename,'utf8');
- assert(text.includes('<html lang="zh-CN">'),filename+': missing language');
+ assert(text.includes('<html lang="en">'),filename+': English must be the static default');
+ assert(text.includes('class="language-toggle"'),filename+': missing language switch');
+ for(const m of text.matchAll(/data-i18n(?:-(?:aria-label|alt|placeholder|content))?="([^"]+)"/g)){
+  const pair=translations[decode(m[1])];
+  assert(pair?.en&&pair?.zh,filename+': missing translation '+m[1]);
+ }
+ const visible=text.replace(/<[^>]*>/g,'').replaceAll('中文','');
+ assert(!/\p{Script=Han}/u.test(visible),filename+': untranslated text in English default');
  assert.equal((text.match(/<h1[\s>]/g)||[]).length,1,filename+': expected one h1');
  assert(!/undefined|TODO|lorem ipsum/i.test(text),filename+': unfinished content');
  for(const m of text.matchAll(/(?:href|src)="([^"#]+)(?:#[^"]*)?"/g)){
@@ -31,4 +40,4 @@ for(const [file,docs] of Object.entries(galleries)){
 const about=readFileSync('about.html','utf8');
 assert(about.includes('北京优乐科技有限公司')&&about.includes('2025.09 — 至今'),'Current role missing');
 assert(!about.includes('mailto:'),'No public contact email has been supplied');
-console.log(`PASS: ${roots.length} pages, ${count} local references, complete PDF page order, and current role.`);
+console.log(`PASS: ${roots.length} bilingual pages, ${count} local references, complete PDF page order, and current role.`);
