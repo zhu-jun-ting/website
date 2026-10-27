@@ -54,9 +54,12 @@ Unity 版本以 `ProjectSettings/ProjectVersion.txt` 为准，本次为 **6000.1
 | `scripts/i18n.mjs` | 对应中英文文本 |
 | `projects/pinball-rouge.html` | 正式项目页 |
 | `projects/orange-dawn.html` | 保留旧入口，显示同一内容，canonical 指向正式页 |
-| `assets/images/pinball-rouge-cover.jpg` | Steam 官方商店横幅 |
+| `assets/images/pinball-rouge-cover-2x.jpg` | Steam 官方商店 920 × 430 横幅；首页主视觉 |
 | `assets/images/pinball-rouge-1.jpg` | Steam 截图：对局结算 |
-| `assets/images/pinball-rouge-2.jpg` | Steam 截图：弹射战斗；首页主视觉 |
+| `assets/images/pinball-rouge-2.jpg` | Steam 截图：弹射战斗 |
 | `assets/images/pinball-rouge-3.jpg` | Steam 截图：卡牌构筑 |
+| `assets/images/pinball-rouge-4.jpg` | Steam 截图：卡牌编辑 |
+| `assets/images/pinball-rouge-5.jpg` | Steam 截图：主菜单 |
+| `assets/images/pinball-rouge-6.jpg` | Steam 截图：战斗与掉落 |
 
 图片保留商店原图。商店截图里的调试控件和文字属于原始游戏画面，网站语言切换不改写图片。没有把商店描述中的未来内容计划或数量上限写成已实现成果。

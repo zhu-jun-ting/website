@@ -82,7 +82,7 @@ export const projects = [
 export const featuredProject = {
   slug:'pinball-rouge', title:'Pinball Rouge', category:'game',
   categoryLabel:'弹球肉鸽 · Pinball roguelite', role:'游戏策划 / 程序开发 · Game design / Programming',
-  cover:'pinball-rouge-cover.jpg'
+  cover:'pinball-rouge-cover-2x.jpg'
 };
 export const additional = [
   {title:'Project Gutenberg',type:'UI / UX',year:'2021',text:'围绕捐赠流程重设计，完成前期调研、用户访谈、线框图和 Figma 高保真原型。',url:'https://www.behance.net/gallery/132578569/Project-Gutenberg-Donation-Flow-Redesigned'},

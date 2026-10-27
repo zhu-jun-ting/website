@@ -1,5 +1,12 @@
 // English is emitted into the HTML; Chinese remains available without a network request.
 const entries = {
+  '战斗与掉落':'Combat and loot', '卡牌编辑与组合':'Arranging and combining cards', '卡牌选择':'Choosing cards', '游戏主菜单':'Main menu',
+  '探索与成长':'Exploration & progression', '设计与开发':'Design & development',
+  '自动射击让操作重点回到走位和生存。子弹像弹球一样在碰撞中反弹，玩家需要在敌群与弹幕之间寻找空间，让移动、弹射轨迹和能力效果共同参与战斗。':'Automatic shooting puts the focus on movement and survival. Projectiles bounce on impact like pinballs, while players find space between enemies and incoming fire. Movement, ricochet paths, and ability effects work together to shape each encounter.',
+  '卡牌既是战斗奖励，也是调整玩法的工具。通过拖放卡牌、配置卡槽和组合数值与效果，玩家可以尝试不同的武器与能力搭配，把一局中的选择转化为自己的构筑。':'Cards are both combat rewards and tools for changing how you play. Drag cards into slots and combine values and effects to experiment with weapons and abilities, turning the choices made during a run into your own build.',
+  '在房间之间推进，经历战斗、收集奖励并调整构筑。房间系统组织战斗、商店、事件与 Boss 等不同节点；难度选项和对局结算则帮助玩家选择挑战，并回看这一局的表现。':'Progress through rooms, fight, collect rewards, and refine your build. The room system connects combat, shops, events, and bosses. Difficulty options let players choose their challenge, while the results screen offers a look back at the run.',
+  '我负责玩法与系统策划，以及 Unity / C# 的原型和功能开发。项目实现涵盖枪械与子弹反弹、卡牌数据与拖放交互、房间切换，以及菜单、设置和对局统计；把战斗、构筑与流程连接成可游玩的整体。':'I handle gameplay and systems design, alongside prototyping and implementation in Unity / C#. The work spans weapons and projectile ricochets, card data and drag-and-drop interactions, room transitions, menus, settings, and run statistics, connecting combat, builds, and progression into a playable game.',
+  '2023 年的团队原型为项目建立了起点，后续独立开发继续完善玩法并完成 Steam 发布。源码保留 Orange Dawn 仓库名称，方便追溯项目的开发过程。':'The 2023 team prototype established the starting point. I continued development independently, refining the gameplay and bringing the game to Steam. The source repository retains the Orange Dawn name to preserve the project’s development history.',
   'Steam 商店':'View on Steam', 'GitHub 源码':'Source on GitHub',
   '2023 — 至今':'2023 — Present', '游戏策划 / 程序开发':'Game Design / Programming',
   'Pinball Rouge 游戏截图':'Pinball Rouge screenshots',
