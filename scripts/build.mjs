@@ -4,7 +4,7 @@ import {localize, translationsScript} from './i18n.mjs';
 
 const esc = s => String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
 const selectedProjects=[featuredProject,...projects];
-const site='https://zhu-jun-ting.github.io/Personal-Website-Local-Files/';
+const site='https://zhu-jun-ting.github.io/website/';
 function layout(path,title,description,body,active='') {
   const base=path==='404.html'?site:(path.includes('/')?'../':'./');
   const nav=[['作品','projects/index.html','work'],['科研','research/index.html','research'],['关于','about.html','about'],['实验归档','archive/index.html','archive']];

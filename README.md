@@ -2,7 +2,7 @@
 
 个人作品集、科研与早期交互实验归档。
 
-线上入口：https://zhu-jun-ting.github.io/Personal-Website-Local-Files/
+线上入口：https://zhu-jun-ting.github.io/website/
 
 ## 页面入口
 
@@ -27,7 +27,7 @@ npm run check
 npm run dev
 ```
 
-打开 http://127.0.0.1:4173/Personal-Website-Local-Files/ 。
+打开 http://127.0.0.1:4173/website/ 。
 
 - `scripts/content.mjs`：核心作品、更多项目的内容与外链。
 - `scripts/i18n.mjs`：中英文翻译与构建时覆盖检查。新增页面文案后补充英文翻译；构建会提示缺失项。
