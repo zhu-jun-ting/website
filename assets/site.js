@@ -1,13 +1,11 @@
 const dictionary = window.PORTFOLIO_I18N || {};
 const languageButton = document.querySelector('.language-toggle');
-const languageKey = 'junting-portfolio-language';
 const siteRoot = new URL('../', document.querySelector('script[src$="assets/site.js"]').src);
 let language = 'en';
 function preferredLanguage() {
   const explicit = new URL(location.href).searchParams.get('lang');
-  if (explicit === 'en' || explicit === 'zh') return explicit;
-  try { return localStorage.getItem(languageKey) === 'zh' ? 'zh' : 'en'; }
-  catch { return 'en'; }
+  // Direct visits always start in English; explicit links preserve a manual choice.
+  return explicit === 'zh' ? 'zh' : 'en';
 }
 function applyLanguage(next, updateUrl = false) {
   language = next === 'zh' ? 'zh' : 'en';
@@ -25,7 +23,6 @@ function applyLanguage(next, updateUrl = false) {
   languageButton.textContent = language === 'en' ? '中文' : 'EN';
   languageButton.lang = language === 'en' ? 'zh-CN' : 'en';
   languageButton.setAttribute('aria-label', language === 'en' ? 'Switch to Chinese' : '切换到英文');
-  try { localStorage.setItem(languageKey, language); } catch { /* URL links also preserve the choice. */ }
   if (updateUrl) {
     const url = new URL(location.href);
     url.searchParams.set('lang', language);
